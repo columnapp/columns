@@ -1,0 +1,12 @@
+{
+  "name": "date",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@columnapp/schema": "^0.0.1-alpha5"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.6"
+  }
+}

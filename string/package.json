@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@columnapp/schema": "^0.0.1-alpha5"
+  }
+}
