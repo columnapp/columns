@@ -2,7 +2,7 @@ import { ColumnSchemaBoolean } from '@columnapp/schema'
 
 export default {
   name: 'True/False',
-  version: 'boolean.0.0.1',
+  type: 'boolean',
   info: 'Standard Checkbox',
   filters: {
     is: {
@@ -15,7 +15,7 @@ export default {
     },
   },
   parse: {
-    info: 'basic boolean',
+    info: 'Converts anything to true/false, anything empty or zeroes would be false, everything else is true',
     logic: ($api, raw) => Boolean(raw),
   },
   value: {

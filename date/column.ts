@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { ColumnSchemaDate } from '@columnapp/schema'
 
 const column: ColumnSchemaDate = {
-  version: 'date.0.0.1',
+  type: 'date',
   name: 'Date',
   info: 'date',
   config: {},

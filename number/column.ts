@@ -1,7 +1,7 @@
 import { ColumnSchemaNumber } from '@columnapp/schema'
 
 const column: ColumnSchemaNumber = {
-  version: 'number.0.0.1',
+  type: 'number',
   name: 'Number',
   info: 'Number',
   display: {

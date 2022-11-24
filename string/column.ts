@@ -1,8 +1,9 @@
-import { ColumnSchema } from 'engine/column'
+import { ColumnSchemaString } from '@columnapp/schema'
 
-export const ColumnString: ColumnSchema = {
-  version: 'string.0.0.0',
-  info: 'Text',
+export default {
+  type: 'string',
+  name: 'Text',
+  info: 'text',
   display: {
     info: 'render text',
     render: {
@@ -20,9 +21,8 @@ export const ColumnString: ColumnSchema = {
   },
   filters: {
     contains: {
-      info: 'asdssa',
       type: 'string',
-      label: 'Case Sensitive',
+      info: 'Case Sensitive',
       form: {
         type: 'text',
       },
@@ -31,4 +31,4 @@ export const ColumnString: ColumnSchema = {
       },
     },
   },
-}
+} as ColumnSchemaString
