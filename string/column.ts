@@ -11,7 +11,7 @@ export default {
     },
   },
   parse: {
-    info: 'basic string parsing',
+    info: 'converts everything to string',
     logic: (_api, raw) => (raw == null ? raw : String(raw)),
   },
   value: {
@@ -28,6 +28,16 @@ export default {
       },
       logic: ($api, keyword) => {
         return $api.value == null ? false : $api.value.toLocaleLowerCase().includes(keyword)
+      },
+    },
+    '=': {
+      type: 'string',
+      info: 'equals',
+      form: {
+        type: 'text',
+      },
+      logic: ($api, keyword) => {
+        return $api.value == null ? false : $api.value == keyword
       },
     },
   },

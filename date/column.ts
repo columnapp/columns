@@ -1,14 +1,21 @@
-import dayjs from 'dayjs'
+const Date = require('any-date-parser')
 import { ColumnSchemaDate } from '@columnapp/schema'
 
 const column: ColumnSchemaDate = {
   type: 'date',
   name: 'Date',
-  info: 'date',
+  info: 'Date',
   config: {},
   parse: {
-    info: 'basic dayjs based parsing',
-    logic: ($api, raw) => dayjs(raw as any).toDate(),
+    info: 'Best case scenario parsing to date',
+    logic: ($api, raw) => {
+      switch (typeof raw) {
+        case 'string':
+          return Date.fromString(raw)
+        default:
+          return Date.fromAny(raw)
+      }
+    },
   },
   display: {
     info: 'just as string',
