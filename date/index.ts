@@ -18,39 +18,39 @@ const column: ColumnSchemaDate = {
     },
   },
   display: {
-    info: 'just as string',
-    render: { type: 'string' },
+    info: 'local date',
+    render: (api) => ({ type: 'string', value: api.cell.value == null ? null : api.cell.value.toLocaleDateString() }),
   },
   filters: {
     '=': {
       info: 'equal',
       type: 'date',
       form: { type: 'date' },
-      logic: ($api, value) => ($api.value == null ? false : $api.value === value),
+      logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value === value),
     },
     '<': {
       type: 'date',
       info: 'less than',
       form: { type: 'date' },
-      logic: ($api, value) => ($api.value == null ? false : $api.value < value),
+      logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value < value),
     },
     '<=': {
       type: 'date',
       info: 'less than equal to',
       form: { type: 'date' },
-      logic: ($api, value) => ($api.value == null ? false : $api.value <= value),
+      logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value <= value),
     },
     '>': {
       type: 'date',
       info: 'greater than',
       form: { type: 'date' },
-      logic: ($api, value) => ($api.value == null ? false : $api.value > value),
+      logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value > value),
     },
     '>=': {
       type: 'date',
       info: 'greater than equal to',
       form: { type: 'date' },
-      logic: ($api, value) => ($api.value == null ? false : $api.value >= value),
+      logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value >= value),
     },
   },
   value: {

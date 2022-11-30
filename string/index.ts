@@ -1,6 +1,6 @@
 import { ColumnSchemaString } from '@columnapp/schema'
 
-export default {
+const column: ColumnSchemaString = {
   type: 'string',
   name: 'Text',
   info: 'text',
@@ -12,7 +12,7 @@ export default {
   },
   parse: {
     info: 'converts everything to string',
-    logic: (_api, raw) => (raw == null ? raw : String(raw)),
+    logic: (_api, raw) => (raw == null ? null : String(raw)),
   },
   value: {
     type: 'cell',
@@ -27,7 +27,7 @@ export default {
         type: 'text',
       },
       logic: ($api, keyword) => {
-        return $api.value == null ? false : $api.value.toLocaleLowerCase().includes(keyword)
+        return $api.cell.value != null && $api.cell.value.toLocaleLowerCase().includes(keyword)
       },
     },
     '=': {
@@ -37,8 +37,9 @@ export default {
         type: 'text',
       },
       logic: ($api, keyword) => {
-        return $api.value == null ? false : $api.value == keyword
+        return $api.cell.value != null && $api.cell.value == keyword
       },
     },
   },
-} as ColumnSchemaString
+}
+export default column

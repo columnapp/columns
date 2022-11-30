@@ -1,6 +1,6 @@
 import { ColumnSchemaBoolean } from '@columnapp/schema'
 
-export default {
+const column: ColumnSchemaBoolean = {
   name: 'True/False',
   type: 'boolean',
   info: 'Standard Checkbox',
@@ -11,7 +11,7 @@ export default {
       form: {
         type: 'checkbox',
       },
-      logic: ($api, value) => $api.value === value,
+      logic: ($api, value) => $api.cell.value === value,
     },
   },
   parse: {
@@ -29,4 +29,5 @@ export default {
       type: 'checkbox',
     },
   },
-} as ColumnSchemaBoolean
+}
+export default column

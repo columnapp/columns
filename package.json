@@ -1,12 +1,18 @@
 {
-  "scripts": {},
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
   "dependencies": {
-    "@columnapp/schema": "0.0.1-alpha13",
     "any-date-parser": "^1.5.3",
     "dayjs": "^1.11.6"
   },
   "devDependencies": {
+    "@columnapp/schema": "0.0.1-alpha18",
     "@types/node": "^18.11.9",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
     "typescript": "^4.9.3"
   }
 }
