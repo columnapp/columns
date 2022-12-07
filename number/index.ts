@@ -1,14 +1,14 @@
-import { ColumnSchemaNumber } from '@columnapp/schema'
+import { ColumnSchema } from '@columnapp/schema'
 
-const column: ColumnSchemaNumber = {
-  type: 'number',
+const column: ColumnSchema = {
   name: 'Number',
   info: 'Number',
   display: {
     info: 'render number',
-    render: {
+    render: (api) => ({
       type: 'number',
-    },
+      value: api.cell.value,
+    }),
   },
   parse: {
     info: 'convert to number',
@@ -25,39 +25,40 @@ const column: ColumnSchemaNumber = {
   value: {
     type: 'cell',
     info: 'just info form cell',
-    form: {
+    form: (api) => ({
       type: 'number',
-    },
+      value: api.cell.value,
+    }),
   },
   filters: {
     '=': {
       type: 'number',
       info: 'equal',
-      form: { type: 'number' },
+      form: (api) => ({ type: 'number', value: api.cell.value }),
       logic: ($api, value) => $api.cell.value != null && $api.cell.value === value,
     },
     '<': {
       type: 'number',
       info: 'less than',
-      form: { type: 'number' },
+      form: (api) => ({ type: 'number', value: api.cell.value }),
       logic: ($api, value) => $api.cell.value != null && $api.cell.value < value,
     },
     '<=': {
       type: 'number',
       info: 'less than equal to',
-      form: { type: 'number' },
+      form: (api) => ({ type: 'number', value: api.cell.value }),
       logic: ($api, value) => $api.cell.value != null && $api.cell.value <= value,
     },
     '>': {
       type: 'number',
       info: 'greater than',
-      form: { type: 'number' },
+      form: (api) => ({ type: 'number', value: api.cell.value }),
       logic: ($api, value) => $api.cell.value != null && $api.cell.value > value,
     },
     '>=': {
       type: 'number',
       info: 'greater than equal to',
-      form: { type: 'number' },
+      form: (api) => ({ type: 'number', value: api.cell.value }),
       logic: ($api, value) => $api.cell.value != null && $api.cell.value >= value,
     },
   },

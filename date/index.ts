@@ -1,8 +1,7 @@
 const Date = require('any-date-parser')
-import { ColumnSchemaDate } from '@columnapp/schema'
+import { ColumnSchema } from '@columnapp/schema'
 
-const column: ColumnSchemaDate = {
-  type: 'date',
+const column: ColumnSchema = {
   name: 'Date',
   info: 'Date',
   config: {},
@@ -25,40 +24,41 @@ const column: ColumnSchemaDate = {
     '=': {
       info: 'equal',
       type: 'date',
-      form: { type: 'date' },
+      form: (api, value) => ({ type: 'date', value }),
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value === value),
     },
     '<': {
       type: 'date',
       info: 'less than',
-      form: { type: 'date' },
+      form: (api, value) => ({ type: 'date', value }),
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value < value),
     },
     '<=': {
       type: 'date',
       info: 'less than equal to',
-      form: { type: 'date' },
+      form: (api, value) => ({ type: 'date', value }),
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value <= value),
     },
     '>': {
       type: 'date',
       info: 'greater than',
-      form: { type: 'date' },
+      form: (api, value) => ({ type: 'date', value }),
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value > value),
     },
     '>=': {
       type: 'date',
       info: 'greater than equal to',
-      form: { type: 'date' },
+      form: (api, value) => ({ type: 'date', value }),
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value >= value),
     },
   },
   value: {
     type: 'cell',
     info: 'date input',
-    form: {
+    form: (api) => ({
       type: 'date',
-    },
+      value: api.cell.value?.toISOString().split('T')[0],
+    }),
   },
 }
 export default column

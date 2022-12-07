@@ -1,16 +1,16 @@
-import { ColumnSchemaBoolean } from '@columnapp/schema'
+import { ColumnSchema } from '@columnapp/schema'
 
-const column: ColumnSchemaBoolean = {
+const column: ColumnSchema = {
   name: 'True/False',
-  type: 'boolean',
   info: 'Standard Checkbox',
   filters: {
     is: {
       info: 'is true/false',
       type: 'boolean',
-      form: {
+      form: (api) => ({
         type: 'checkbox',
-      },
+        value: api.cell.value,
+      }),
       logic: ($api, value) => $api.cell.value === value,
     },
   },
@@ -21,13 +21,14 @@ const column: ColumnSchemaBoolean = {
   value: {
     info: 'basic boolean',
     type: 'cell',
-    form: { type: 'checkbox' },
+    form: (api) => ({ type: 'checkbox', value: api.cell.value }),
   },
   display: {
     info: 'shows as checkbox',
-    render: {
+    render: (api) => ({
       type: 'checkbox',
-    },
+      value: api.cell.value,
+    }),
   },
 }
 export default column

@@ -1,11 +1,10 @@
-import { ColumnSchemaStrings } from '@columnapp/schema'
+import { ColumnSchema } from '@columnapp/schema'
 
-const column: ColumnSchemaStrings = {
+const column: ColumnSchema = {
   name: 'Multi Text',
-  type: 'string[]',
   info: 'List of texts',
   parse: {
-    info: 'split comma separaterd texts to list of texts',
+    info: 'split comma separated texts to list of texts',
     logic(_, raw) {
       switch (typeof raw) {
         case 'string':
@@ -26,9 +25,10 @@ const column: ColumnSchemaStrings = {
   value: {
     info: 'comma separated texts',
     type: 'cell',
-    form: {
+    form: (api) => ({
       type: 'text',
-    },
+      value: api.cell.value?.join(','),
+    }),
   },
 }
 

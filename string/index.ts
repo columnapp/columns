@@ -1,14 +1,14 @@
-import { ColumnSchemaString } from '@columnapp/schema'
+import { ColumnSchema } from '@columnapp/schema'
 
-const column: ColumnSchemaString = {
-  type: 'string',
+const column: ColumnSchema = {
   name: 'Text',
   info: 'text',
   display: {
     info: 'render text',
-    render: {
+    render: (api) => ({
       type: 'text',
-    },
+      value: api.cell.value,
+    }),
   },
   parse: {
     info: 'converts everything to string',
@@ -17,15 +17,16 @@ const column: ColumnSchemaString = {
   value: {
     type: 'cell',
     info: 'input text',
-    form: { type: 'text' },
+    form: (api) => ({ type: 'text', value: api.cell.value }),
   },
   filters: {
     contains: {
       type: 'string',
       info: 'Case Sensitive',
-      form: {
+      form: (api) => ({
         type: 'text',
-      },
+        value: api.cell.value,
+      }),
       logic: ($api, keyword) => {
         return $api.cell.value != null && $api.cell.value.toLocaleLowerCase().includes(keyword)
       },
@@ -33,9 +34,10 @@ const column: ColumnSchemaString = {
     '=': {
       type: 'string',
       info: 'equals',
-      form: {
+      form: (api) => ({
+        value: api.cell.value,
         type: 'text',
-      },
+      }),
       logic: ($api, keyword) => {
         return $api.cell.value != null && $api.cell.value == keyword
       },
