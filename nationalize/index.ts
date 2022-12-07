@@ -32,6 +32,7 @@ const column: ColumnSchema = {
     type: 'request',
     info: 'fetch data from nationalize.io',
     read: {
+      validate: (api) => api.columns.name?.value != null,
       method: 'get',
       url: 'https://api.nationalize.io/',
       params: (api) => ({
