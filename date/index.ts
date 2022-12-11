@@ -1,4 +1,4 @@
-const Date = require('any-date-parser')
+const DateParser = require('any-date-parser')
 import { ColumnSchema } from '@columnapp/schema'
 
 const column: ColumnSchema = {
@@ -10,15 +10,18 @@ const column: ColumnSchema = {
     logic: ($api, raw) => {
       switch (typeof raw) {
         case 'string':
-          return Date.fromString(raw)
+          return DateParser.fromString(raw)
         default:
-          return Date.fromAny(raw)
+          return DateParser.fromAny(raw)
       }
     },
   },
   display: {
     info: 'local date',
-    render: (api) => ({ type: 'string', value: api.cell.value == null ? null : api.cell.value.toLocaleDateString() }),
+    render: (api, value) => ({
+      type: 'string',
+      value: api.cell.value instanceof Date ? api.cell.value.toLocaleDateString() : null,
+    }),
   },
   filters: {
     '=': {
@@ -55,9 +58,9 @@ const column: ColumnSchema = {
   value: {
     type: 'cell',
     info: 'date input',
-    form: (api) => ({
+    form: (api, value) => ({
       type: 'date',
-      value: api.cell.value?.toISOString().split('T')[0],
+      value: value?.toISOString().split('T')[0],
     }),
   },
 }

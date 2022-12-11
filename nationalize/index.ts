@@ -1,5 +1,10 @@
 import { ColumnSchema } from '@columnapp/schema'
 
+/*
+  {"country":[{"country_id":"ID","probability":0.938},{"country_id":"MY","probability":0.013},{"country_id":"SQ","probability":0.009},{"country_id":"QA","probability":0.004},{"country_id":"JP","probability":0.004}],"name":"Wahyu"}
+*/
+type Value = { country: Array<{ country_id: string; probability: number }>; name: string } | null
+
 const column: ColumnSchema = {
   name: 'Nationalize',
   info: 'Guess the nationality of a name',
@@ -7,22 +12,25 @@ const column: ColumnSchema = {
     info: 'render text',
     render: (api) => ({
       type: 'text',
-      value: api.cell.value,
+      value: (api.cell.value as Value)?.country[0]?.country_id ?? '',
     }),
+  },
+  expose: {
+    countryCode: {
+      label: 'Country Code',
+      info: 'most probable country this name is from',
+      returns: (api) => (api.cell.value as Value)?.country[0]?.country_id ?? null,
+    },
+    countryProbability: {
+      label: 'Country Probability',
+      info: 'how probable is the countryCode, value is from 0 to 1',
+      returns: (api) => (api.cell.value as Value)?.country[0]?.probability ?? null,
+    },
   },
   parse: {
     info: 'parse nationalize.io response',
     logic: (_api, raw) => {
-      /*
-      {"country":[{"country_id":"ID","probability":0.938},{"country_id":"MY","probability":0.013},{"country_id":"SQ","probability":0.009},{"country_id":"QA","probability":0.004},{"country_id":"JP","probability":0.004}],"name":"Wahyu"}
-      */
-      let data: { country: { country_id: string; probability: number }[]; name: string } = { country: [], name: '' }
-      if (typeof raw === 'string') {
-        data = JSON.parse(raw)
-      } else if (typeof raw === 'object') {
-        data = raw as typeof data
-      }
-      return data.country[0]?.country_id ?? ''
+      return raw
     },
   },
   value: {
