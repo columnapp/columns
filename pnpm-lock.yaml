@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@columnapp/schema': 0.0.1-alpha30
-  '@types/node': ^18.11.13
+  '@columnapp/schema': 0.0.1-alpha34
+  '@types/node': ^18.11.15
   any-date-parser: ^1.5.3
   dayjs: ^1.11.7
   ts-node: ^10.9.1
@@ -14,18 +14,18 @@ dependencies:
   dayjs: 1.11.7
 
 devDependencies:
-  '@columnapp/schema': 0.0.1-alpha30_73migmg77y47omm5253gettkxi
-  '@types/node': 18.11.13
-  ts-node: 10.9.1_73migmg77y47omm5253gettkxi
+  '@columnapp/schema': 0.0.1-alpha34_ewfw2lwfc3dwdvz7r6yz2ssqyi
+  '@types/node': 18.11.15
+  ts-node: 10.9.1_ewfw2lwfc3dwdvz7r6yz2ssqyi
   tsconfig-paths: 4.1.1
   typescript: 4.9.4
 
 packages:
 
-  /@columnapp/schema/0.0.1-alpha30_73migmg77y47omm5253gettkxi:
-    resolution: {integrity: sha512-17ejvq4/Gz5HOwU0B1nTI+oKOzI+1GmB6gllXs9/Fvbb64lLXwTKLfawPi9eZmbqfdpcAvAIFRZjEOWhPw8mmg==}
+  /@columnapp/schema/0.0.1-alpha34_ewfw2lwfc3dwdvz7r6yz2ssqyi:
+    resolution: {integrity: sha512-GQInHAINdS3xd0g9bK4a2CGuUtL2PZPZva4brEyv0wV9Vr+Ba7HXm8lqjKaGHYe7aIFjFQPBuotg5fnieNQKNA==}
     dependencies:
-      ts-node: 10.9.1_73migmg77y47omm5253gettkxi
+      ts-node: 10.9.1_ewfw2lwfc3dwdvz7r6yz2ssqyi
       zod: 3.19.1
       zod-validation-error: 0.2.1_zod@3.19.1
     transitivePeerDependencies:
@@ -80,8 +80,8 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
 
-  /@types/node/18.11.13:
-    resolution: {integrity: sha512-IASpMGVcWpUsx5xBOrxMj7Bl8lqfuTY7FKAnPmu5cHkfQVWF8GulWS1jbRqA934qZL35xh5xN/+Xe/i26Bod4w==}
+  /@types/node/18.11.15:
+    resolution: {integrity: sha512-VkhBbVo2+2oozlkdHXLrb3zjsRkpdnaU2bXmX8Wgle3PUi569eLRaHGlgETQHR7lLL1w7GiG3h9SnePhxNDecw==}
     dev: true
 
   /acorn-walk/8.2.0:
@@ -135,7 +135,7 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /ts-node/10.9.1_73migmg77y47omm5253gettkxi:
+  /ts-node/10.9.1_ewfw2lwfc3dwdvz7r6yz2ssqyi:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -154,7 +154,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.13
+      '@types/node': 18.11.15
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3

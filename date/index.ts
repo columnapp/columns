@@ -18,7 +18,7 @@ const column: ColumnSchema = {
   },
   display: {
     info: 'local date',
-    render: (api, value) => ({
+    render: (api) => ({
       type: 'string',
       value: api.cell.value instanceof Date ? api.cell.value.toLocaleDateString() : null,
     }),
@@ -58,10 +58,12 @@ const column: ColumnSchema = {
   value: {
     type: 'cell',
     info: 'date input',
-    form: (api, value) => ({
-      type: 'date',
-      value: value?.toISOString().split('T')[0],
-    }),
+    form: (api, value) => {
+      return {
+        type: 'date',
+        value: api.cell.value instanceof Date ? value?.toISOString().split('T')[0] : null,
+      }
+    },
   },
 }
 export default column

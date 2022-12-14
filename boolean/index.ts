@@ -7,9 +7,9 @@ const column: ColumnSchema = {
     is: {
       info: 'is true/false',
       type: 'boolean',
-      form: (api) => ({
+      form: (api, value) => ({
         type: 'checkbox',
-        value: api.cell.value,
+        value,
       }),
       logic: ($api, value) => $api.cell.value === value,
     },

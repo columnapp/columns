@@ -23,9 +23,9 @@ const column: ColumnSchema = {
     contains: {
       type: 'string',
       info: 'Case Sensitive',
-      form: (api) => ({
+      form: (api, value) => ({
         type: 'text',
-        value: api.cell.value,
+        value,
       }),
       logic: ($api, keyword) => {
         return $api.cell.value != null && $api.cell.value.toLocaleLowerCase().includes(keyword)
@@ -34,8 +34,8 @@ const column: ColumnSchema = {
     '=': {
       type: 'string',
       info: 'equals',
-      form: (api) => ({
-        value: api.cell.value,
+      form: (api, value) => ({
+        value,
         type: 'text',
       }),
       logic: ($api, keyword) => {
