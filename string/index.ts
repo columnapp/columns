@@ -3,6 +3,7 @@ import { ColumnSchema } from '@columnapp/schema'
 const column: ColumnSchema = {
   name: 'Text',
   info: 'text',
+  primitive: (api) => api.cell.value?.toString(),
   display: {
     info: 'render text',
     render: (api) => ({
@@ -10,14 +11,12 @@ const column: ColumnSchema = {
       value: api.cell.value,
     }),
   },
-  parse: {
-    info: 'converts everything to string',
-    logic: (_api, raw) => (raw == null ? null : String(raw)),
-  },
-  value: {
-    type: 'cell',
+  cell: {
     info: 'input text',
-    form: (api) => ({ type: 'text', value: api.cell.value }),
+    form: {
+      parse: (_api, raw) => ({ value: raw == null ? null : String(raw) }),
+      render: (api) => ({ type: 'text', value: api.cell.value }),
+    },
   },
   filters: {
     contains: {

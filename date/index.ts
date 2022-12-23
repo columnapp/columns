@@ -5,17 +5,7 @@ const column: ColumnSchema = {
   name: 'Date',
   info: 'Date',
   config: {},
-  parse: {
-    info: 'Best case scenario parsing to date',
-    logic: ($api, raw) => {
-      switch (typeof raw) {
-        case 'string':
-          return DateParser.fromString(raw)
-        default:
-          return DateParser.fromAny(raw)
-      }
-    },
-  },
+  primitive: (api) => (api.cell.value instanceof Date ? api.cell.value?.getUTCSeconds() : null),
   display: {
     info: 'local date',
     render: (api) => ({
@@ -55,14 +45,23 @@ const column: ColumnSchema = {
       logic: ($api, value) => ($api.cell.value == null ? false : $api.cell.value >= value),
     },
   },
-  value: {
-    type: 'cell',
+  cell: {
     info: 'date input',
-    form: (api, value) => {
-      return {
-        type: 'date',
-        value: api.cell.value instanceof Date ? value?.toISOString().split('T')[0] : null,
-      }
+    form: {
+      parse: ($api, raw) => {
+        switch (typeof raw) {
+          case 'string':
+            return { value: DateParser.fromString(raw) }
+          default:
+            return { value: DateParser.fromAny(raw) }
+        }
+      },
+      render: (api, value) => {
+        return {
+          type: 'date',
+          value: api.cell.value instanceof Date ? value?.toISOString().split('T')[0] : null,
+        }
+      },
     },
   },
 }

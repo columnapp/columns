@@ -3,6 +3,7 @@ import { ColumnSchema } from '@columnapp/schema'
 const column: ColumnSchema = {
   name: 'True/False',
   info: 'Standard Checkbox',
+  primitive: (api) => api.cell.value,
   filters: {
     is: {
       info: 'is true/false',
@@ -14,14 +15,12 @@ const column: ColumnSchema = {
       logic: ($api, value) => $api.cell.value === value,
     },
   },
-  parse: {
-    info: 'Converts anything to true/false, anything empty or zeroes would be false, everything else is true',
-    logic: ($api, raw) => Boolean(raw),
-  },
-  value: {
+  cell: {
     info: 'basic boolean',
-    type: 'cell',
-    form: (api) => ({ type: 'checkbox', value: api.cell.value }),
+    form: {
+      parse: (_, raw) => ({ value: Boolean(raw) }),
+      render: (api) => ({ type: 'checkbox', value: api.cell.value }),
+    },
   },
   display: {
     info: 'shows as checkbox',

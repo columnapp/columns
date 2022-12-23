@@ -8,44 +8,41 @@ type Value = { country: Array<{ country_id: string; probability: number }>; name
 const column: ColumnSchema = {
   name: 'Nationalize',
   info: 'Guess the nationality of a name',
+  primitive: (api) => (api.cell.value as Value)?.country[0]?.country_id ?? null,
   display: {
     info: 'render text',
     render: (api) => ({
       type: 'text',
-      value: (api.cell.value as Value)?.country[0]?.country_id ?? '',
+      value: (api.cell.value as Value)?.country?.[0]?.country_id ?? '',
     }),
   },
   expose: {
     countryCode: {
       label: 'Country Code',
       info: 'most probable country this name is from',
-      returns: (api) => (api.cell.value as Value)?.country[0]?.country_id ?? null,
+      returns: (api) => (api.cell.value as Value)?.country?.[0]?.country_id ?? null,
     },
     countryProbability: {
       label: 'Country Probability',
       info: 'how probable is the countryCode, value is from 0 to 1',
-      returns: (api) => (api.cell.value as Value)?.country[0]?.probability ?? null,
+      returns: (api) => (api.cell.value as Value)?.country?.[0]?.probability ?? null,
     },
   },
-  parse: {
-    info: 'parse nationalize.io response',
-    logic: (_api, raw) => {
-      return raw
-    },
-  },
-  value: {
-    config: {
-      name: true,
-    },
-    type: 'request',
+
+  cell: {
     info: 'fetch data from nationalize.io',
-    read: {
-      validate: (api) => api.columns.name?.value != null,
-      method: 'get',
-      url: 'https://api.nationalize.io/',
-      params: (api) => ({
-        name: api.columns.name?.value,
-      }),
+    request: {
+      read: {
+        validate: (api) => api.columns.name?.value != null,
+        method: 'get',
+        url: 'https://api.nationalize.io/',
+        params: (api) => ({
+          name: api.columns.name?.value,
+        }),
+        parse: (_api, raw) => {
+          return raw
+        },
+      },
     },
   },
   filters: {},

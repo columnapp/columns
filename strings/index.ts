@@ -3,32 +3,33 @@ import { ColumnSchema } from '@columnapp/schema'
 const column: ColumnSchema = {
   name: 'Multi Text',
   info: 'List of texts',
-  parse: {
-    info: 'split comma separated texts to list of texts',
-    logic(_, raw) {
-      switch (typeof raw) {
-        case 'string':
-          return raw.split(',')
-      }
-      if (Array.isArray(raw)) {
-        return raw
-      }
-    },
-  },
+  primitive: (api) => (api.cell.value ?? []).join('-'),
+
   display: {
     info: 'Comma separated text',
     render: (api) => ({
       type: 'string',
-      value: api.cell.value?.join(', '),
+      value: Array.isArray(api.cell.value) ? api.cell.value?.join(',') : api.cell.value ?? '',
     }),
   },
-  value: {
+  cell: {
     info: 'comma separated texts',
-    type: 'cell',
-    form: (api) => ({
-      type: 'text',
-      value: api.cell.value?.join(','),
-    }),
+    form: {
+      render: (api) => ({
+        type: 'text',
+        value: Array.isArray(api.cell.value) ? api.cell.value?.join(',') : api.cell.value ?? '',
+      }),
+      parse: (_, raw) => {
+        switch (typeof raw) {
+          case 'string':
+            return { value: raw.split(',') }
+        }
+        if (Array.isArray(raw)) {
+          return { value: raw }
+        }
+        return null
+      },
+    },
   },
 }
 

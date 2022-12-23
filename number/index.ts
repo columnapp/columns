@@ -3,6 +3,7 @@ import { ColumnSchema } from '@columnapp/schema'
 const column: ColumnSchema = {
   name: 'Number',
   info: 'Number',
+  primitive: (api) => api.cell.value,
   display: {
     info: 'render number',
     render: (api) => ({
@@ -10,25 +11,23 @@ const column: ColumnSchema = {
       value: api.cell.value,
     }),
   },
-  parse: {
-    info: 'convert to number',
-    logic: (_api, raw) => {
-      if (typeof raw === 'number') {
-        return raw
-      } else if (typeof raw === 'string') {
-        const result = Number(raw)
-        return isNaN(result) ? null : result
-      }
-      return null
-    },
-  },
-  value: {
-    type: 'cell',
+  cell: {
     info: 'just info form cell',
-    form: (api) => ({
-      type: 'number',
-      value: api.cell.value,
-    }),
+    form: {
+      render: (api) => ({
+        type: 'number',
+        value: api.cell.value,
+      }),
+      parse: (_api, raw) => {
+        if (typeof raw === 'number') {
+          return { value: raw }
+        } else if (typeof raw === 'string') {
+          const result = Number(raw)
+          return { value: isNaN(result) ? null : result }
+        }
+        return { value: null }
+      },
+    },
   },
   filters: {
     '=': {
