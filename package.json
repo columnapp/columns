@@ -9,8 +9,8 @@
     "dayjs": "^1.11.7"
   },
   "devDependencies": {
-    "@columnapp/schema": "0.0.1-alpha38",
-    "@types/node": "^18.11.17",
+    "@columnapp/schema": "0.0.1-alpha47",
+    "@types/node": "^18.11.18",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1",
     "typescript": "^4.9.4"

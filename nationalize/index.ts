@@ -12,7 +12,7 @@ const column: ColumnSchema = {
   display: {
     info: 'render text',
     render: (api) => ({
-      type: 'text',
+      type: 'string',
       value: (api.cell.value as Value)?.country?.[0]?.country_id ?? '',
     }),
   },
@@ -36,11 +36,11 @@ const column: ColumnSchema = {
         validate: (api) => api.columns.name?.value != null,
         method: 'get',
         url: 'https://api.nationalize.io/',
-        params: (api) => ({
+        query: (api) => ({
           name: api.columns.name?.value,
         }),
         parse: (_api, raw) => {
-          return raw
+          return { value: raw }
         },
       },
     },
